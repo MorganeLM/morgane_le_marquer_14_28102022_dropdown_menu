@@ -1,7 +1,9 @@
-import './App.css';
+import React from "react";
+import {useState} from 'react';
+import ReactDropdownMenu from "../lib/components/ReactDropdownMenu";
 
 function App(){
-  const states = [
+    const states = [
     {
         "name": "Alabama",
         "abbreviation": "AL"
@@ -237,21 +239,25 @@ function App(){
     {
         "name": "Wyoming",
         "abbreviation": "WY"
-    }
-];
+    }];
 
-  const firstState = states[0];
-  let statesWithoutFirst = states;
-  statesWithoutFirst.shift();
+    const [selected, setSelected] = useState(states[0].name);
+
+    const handleChange = (value) => {
+        setSelected(value)
+    }
 
   return (
-    <select className="App form-select" aria-label="Default select example">
-      <option defaultValue>{firstState.name}</option>
-      {statesWithoutFirst.map(state => (
-        <option key={state.name}>{state.name}</option>
-      ))} 
-    </select>
+    <div style={{ width: 500, margin: "30px auto" }}>
+        <h1 style={{ margin: "15px 0" }}>Hello React Dropdown</h1>
+        <label htmlFor='mySelector'>Choose a state:</label>
+        <ReactDropdownMenu options={states} 
+                           onChange={handleChange} 
+                           id={'mySelector'}/>   
+        <p style={{ margin: "15px 0" }}>The selected value is: {selected}</p>
+    </div>
   );
 }
 
 export default App;
+
