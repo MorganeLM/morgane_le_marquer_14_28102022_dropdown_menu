@@ -3,16 +3,18 @@ import './ReactDropdownMenu.css';
 
 function ReactDropdownMenu(props){
     const handleChange = event => {
-        props.onChange(event.target.value);
+        const selectedOption = props.options.filter(option => option.name === event.target.value)[0];
+        props.onChange(selectedOption);
       };
 
   return (
     <select id={props.id}
             className="react-dropdown-menu form-select"
             onChange={(e)=>handleChange(e)}>
-      {props.options.map(option => (
-        <option key={option.name} value={option.name}>{option.name}</option>
-      ))} 
+      {props.options.map(option => {
+        return <option key={option.name} value={option.name}>{option.name}</option>;
+      }
+      )} 
     </select>
   );
 }

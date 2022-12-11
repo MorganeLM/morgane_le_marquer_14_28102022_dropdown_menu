@@ -241,20 +241,22 @@ function App(){
         "abbreviation": "WY"
     }];
 
-    const [selected, setSelected] = useState(states[0].name);
+    const [selected, setSelected] = useState(states[0]);
 
-    const handleChange = (value) => {
-        setSelected(value)
+    const handleChange = (option) => {
+        setSelected(option)
     }
 
   return (
     <div style={{ width: 500, margin: "30px auto" }}>
         <h1 style={{ margin: "15px 0" }}>Hello React Dropdown</h1>
         <label htmlFor='mySelector'>Choose a state:</label>
+
         <ReactDropdownMenu options={states} 
                            onChange={handleChange} 
-                           id={'mySelector'}/>   
-        <p style={{ margin: "15px 0" }}>The selected value is: {selected}</p>
+                           id={'mySelector'}/>  
+                            
+        <p style={{ margin: "15px 0" }}>The selected value is: {selected.name} ({selected.abbreviation})</p>
     </div>
   );
 }

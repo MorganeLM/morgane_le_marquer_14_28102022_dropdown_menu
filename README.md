@@ -14,7 +14,7 @@ A library of React components created using `create-react-app` for a ready-to-us
 
 ## Usage
 To use the plugin, import it in your React component. 
-It needs the two props handleChange and options to work properly: handleChange is the function executed when a new value is selected and options is an array of object with a "name" required property used to populate the component. 
+It needs the two props handleChange and options to work properly: onChange is the function executed when a new value is selected and options is an array of object with a "name" required property used to populate the component. The entire option object is provided as parameter to onChange function.
 The id property is optional to add an id to the select of the component.
 
 Example:
@@ -27,19 +27,22 @@ function App(){
     const states = [
     {
         "name": "Alabama",
+        "abbreviation": "AL"
     },
     {
         "name": "Alaska",
+        "abbreviation": "AK"
     },
     {
         "name": "Arizona",
+        "abbreviation": "AZ"
     }
    ];
 
-    const [selected, setSelected] = useState(states[0].name);
+    const [selected, setSelected] = useState(states[0]);
 
-    const handleChange = (value) => {
-        setSelected(value)
+    const handleChange = (option) => {
+        setSelected(option);
     }
 
   return (
@@ -49,7 +52,7 @@ function App(){
         <ReactDropdownMenu options={states} 
                            onChange={handleChange} 
                            id={'mySelector'}/>   
-        <p>The selected value is: {selected}</p>
+        <p>The selected value is: {selected.name} ({selected.abbreviation}) </p>
     </>
   );
 }
